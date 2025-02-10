@@ -121,6 +121,7 @@ BEGIN
 
     uio_out <= "00000000";
     uio_oe <= "00000000";
+    uo_out(7 downto 1) <= "0000000";
  
 
 UC : Control_unit
