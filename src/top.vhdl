@@ -8,9 +8,9 @@ entity tt_um_top is
         RAM_SIZE : INTEGER := 64);
     port (
         
-        ui_in   : in  std_logic;
-        uo_out  : out std_logic;
-        uio_in  : in  std_logic;
+        ui_in   : in  std_logic_vector(7 downto 0);
+        uo_out  : out std_logic_vector(7 downto 0);
+        uio_in  : in  std_logic_vector(7 downto 0);
         uio_out : out std_logic_vector(7 downto 0);
         uio_oe  : out std_logic_vector(7 downto 0);
         ena     : in  std_logic;
@@ -121,7 +121,8 @@ BEGIN
 
     uio_out <= "00000000";
     uio_oe <= "00000000";
-    
+ 
+
 UC : Control_unit
     GENERIC MAP(RAM_ADR_WIDTH => RAM_ADR_WIDTH)
     PORT MAP(
@@ -162,10 +163,10 @@ UC : Control_unit
         rst => not(rst_n),
         clk => clk,
         ce => ena,
-        rx => uio_in,
-        tx => uo_out,
+        rx => uio_in(0),
+        tx => uo_out(0),
         boot => boot,
-        scan_memory => ui_in,
+        scan_memory => ui_in(0),
         ram_out => ram_data_out,
         ram_rw => boot_ram_rw,
         ram_enable => boot_ram_enable,
