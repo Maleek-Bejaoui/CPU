@@ -54,6 +54,7 @@ begin
 
     process(sel_UAL, s_out)
     begin
+        carry <= '0';
         if (sel_UAL = "000") then
             carry <= '0';
         elsif (sel_UAL ="010") then
