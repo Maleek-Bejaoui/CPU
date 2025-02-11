@@ -68,6 +68,7 @@ begin
 
     process(sel_UAL, R1, ACCU)
     begin
+         s_out <= (others =>'0');
         if (sel_UAL="000") then
             s_out <= (others =>'0');
         elsif (sel_UAL="010") then
