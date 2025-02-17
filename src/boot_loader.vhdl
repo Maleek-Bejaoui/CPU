@@ -38,7 +38,7 @@ ARCHITECTURE Behavioral OF boot_loader IS
             clk : IN STD_LOGIC;
             ce : IN STD_LOGIC;
             byte_dv : IN STD_LOGIC;
-            byte : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+            byteee : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
             word_dv : OUT STD_LOGIC;
             word : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
     END COMPONENT;
@@ -51,7 +51,7 @@ ARCHITECTURE Behavioral OF boot_loader IS
             word_dv : IN STD_LOGIC;
             word : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
             byte_dv : OUT STD_LOGIC;
-            byte : OUT STD_LOGIC_VECTOR (7 DOWNTO 0));
+            byteee : OUT STD_LOGIC_VECTOR (7 DOWNTO 0));
     END COMPONENT;
 
     COMPONENT UART_fifoed_send IS
@@ -75,7 +75,7 @@ ARCHITECTURE Behavioral OF boot_loader IS
         );
     END COMPONENT;
 
-    SIGNAL rx_byte, tx_byte : STD_LOGIC_VECTOR(7 DOWNTO 0);
+    SIGNAL  rx_byte,tx_byte : STD_LOGIC_VECTOR(7 DOWNTO 0);
     SIGNAL rx_data_valid, rx_data_valid_dly, tx_data_valid : STD_LOGIC;
     SIGNAL rx_word_valid : STD_LOGIC;
 
@@ -134,7 +134,7 @@ BEGIN
         clk => clk,
         ce => ce,
         byte_dv => rx_data_valid,
-        byte => rx_byte,
+        byteee => rx_byte,
         word_dv => rx_word_valid,
         word => rx_word);
     ---------------------
@@ -168,7 +168,7 @@ BEGIN
         word_dv => tx_data_valid,
         word => ram_out,
         byte_dv => tx_word_valid,
-        byte => tx_byte);
+        byteee => tx_byte);
 
     ---------------------
     -- tx_cycle_counter
