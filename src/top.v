@@ -1,7 +1,4 @@
-module tt_um_top #(
-    parameter RAM_ADR_WIDTH = 6,
-    parameter RAM_SIZE = 64
-)(
+module tt_um_top (
     input  wire [7:0] ui_in,
     output wire [7:0] uo_out,
     input  wire [7:0] uio_in,
@@ -13,7 +10,7 @@ module tt_um_top #(
 );
 
     wire [15:0] UT_data_out;
-    wire [RAM_ADR_WIDTH-1:0] sig_adr;
+    wire [5:0] sig_adr;
     wire carry;
     wire clear_carry;
     wire enable_mem;
@@ -29,11 +26,11 @@ module tt_um_top #(
 
     wire sig_rw;
     wire sig_ram_enable;
-    wire [RAM_ADR_WIDTH-1:0] sig_ram_adr;
+    wire [5:0] sig_ram_adr;
     wire [15:0] sig_ram_in;
 
     wire boot;
-    wire [RAM_ADR_WIDTH-1:0] boot_ram_adr;
+    wire [5:0] boot_ram_adr;
     wire [15:0] boot_ram_in, boot_ram_out;
     wire boot_ram_rw;
     wire boot_ram_enable;
@@ -43,7 +40,7 @@ module tt_um_top #(
     assign uo_out[7:1] = 7'b0000000;
     /* verilator lint_off PINCONNECTEMPTY */
 
-    Control_Unit #(.RAM_ADR_WIDTH(RAM_ADR_WIDTH)) UC (
+    Control_Unit UC (
         .clk(clk),
         .ce(ena),
         .rst(~rst_n),
@@ -80,7 +77,7 @@ module tt_um_top #(
     /* verilator lint_on PINCONNECTEMPTY */
 
     /* verilator lint_off PINCONNECTEMPTY */
-    boot_loader #(.RAM_ADR_WIDTH(RAM_ADR_WIDTH), .RAM_SIZE(RAM_SIZE)) BL (
+    boot_loader BL (
         .rst(~rst_n),
         .clk(clk),
         .ce(ena),
@@ -104,7 +101,7 @@ module tt_um_top #(
     assign sig_ram_adr = (boot) ? boot_ram_adr : sig_adr;
     assign sig_ram_in = (boot) ? boot_ram_in : UT_data_out;
 
-    RAM_SP_64_8 #(.NbBits(16), .Nbadr(RAM_ADR_WIDTH)) UM (
+    RAM_SP_64_8 UM (
         .add(sig_ram_adr),
         .data_in(sig_ram_in),
         .r_w(sig_rw),
