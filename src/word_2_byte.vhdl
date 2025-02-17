@@ -37,7 +37,7 @@ ENTITY word_2_byte IS
         word_dv : IN STD_LOGIC;
         word : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
         byte_dv : OUT STD_LOGIC;
-        byte : OUT STD_LOGIC_VECTOR (7 DOWNTO 0));
+        byteee : OUT STD_LOGIC_VECTOR (7 DOWNTO 0));
 END word_2_byte;
 ARCHITECTURE Behavioral OF word_2_byte IS
 
@@ -62,11 +62,11 @@ BEGIN
     PROCESS (word_dv_dly, word_dv_dly2, word_reg)
     BEGIN
         IF (word_dv_dly = '1') THEN
-            byte <= word_reg(7 DOWNTO 0);
+            byteee <= word_reg(7 DOWNTO 0);
         ELSIF (word_dv_dly2 = '1') THEN
-            byte <= word_reg(15 DOWNTO 8);
+            byteee <= word_reg(15 DOWNTO 8);
         ELSE
-            byte <= (OTHERS => '0');
+            byteee <= (OTHERS => '0');
         END IF;
     END PROCESS;
 
