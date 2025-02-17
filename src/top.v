@@ -41,6 +41,7 @@ module tt_um_top #(
     assign uio_out = 8'b00000000;
     assign uio_oe = 8'b00000000;
     assign uo_out[7:1] = 7'b0000000;
+    /* verilator lint_off PINCONNECTEMPTY */
 
     Control_Unit #(.RAM_ADR_WIDTH(RAM_ADR_WIDTH)) UC (
         .clk(clk),
@@ -58,8 +59,10 @@ module tt_um_top #(
         .sel_UAL(sel_UAL_UC),
         .w_mem(w_mem)
     );
+    /* verilator lint_on PINCONNECTEMPTY */
 
     assign sel_UAL_UT = sel_UAL_UC;
+    /* verilator lint_off PINCONNECTEMPTY */
 
     UT UT1 (
         .data_in(ram_data_out),
@@ -74,6 +77,7 @@ module tt_um_top #(
         .data_out(UT_data_out),
         .carry(carry)
     );
+    /* verilator lint_on PINCONNECTEMPTY */
 
     /* verilator lint_off PINCONNECTEMPTY */
     boot_loader #(.RAM_ADR_WIDTH(RAM_ADR_WIDTH), .RAM_SIZE(RAM_SIZE)) BL (
