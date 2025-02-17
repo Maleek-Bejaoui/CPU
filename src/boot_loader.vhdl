@@ -3,9 +3,6 @@ USE IEEE.STD_LOGIC_1164.ALL;
 USE IEEE.NUMERIC_STD.ALL;
 
 ENTITY boot_loader IS
-    GENERIC (
-        RAM_ADR_WIDTH : INTEGER := 6;
-        RAM_SIZE : INTEGER := 64);
     PORT (
         rst : IN STD_LOGIC;
         clk : IN STD_LOGIC;
@@ -17,7 +14,7 @@ ENTITY boot_loader IS
         ram_out : IN STD_LOGIC_VECTOR(15 DOWNTO 0);
         ram_rw : OUT STD_LOGIC;
         ram_enable : OUT STD_LOGIC;
-        ram_adr : OUT STD_LOGIC_VECTOR(RAM_ADR_WIDTH - 1 DOWNTO 0);
+        ram_adr : OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
         ram_in : OUT STD_LOGIC_VECTOR(15 DOWNTO 0));
 END boot_loader;
 
@@ -55,14 +52,7 @@ ARCHITECTURE Behavioral OF boot_loader IS
     END COMPONENT;
 
     COMPONENT UART_fifoed_send IS
-        GENERIC (
-            fifo_size : INTEGER := 4096;
-            fifo_almost : INTEGER := 4090;
-            drop_oldest_when_full : BOOLEAN := False;
-            asynch_fifo_full : BOOLEAN := True;
-            baudrate : INTEGER := 921600; -- [bps]
-            clock_frequency : INTEGER := 100000000 -- [Hz]
-        );
+       
         PORT (
             clk_100MHz : IN STD_LOGIC;
             reset : IN STD_LOGIC;
@@ -82,7 +72,7 @@ ARCHITECTURE Behavioral OF boot_loader IS
     SIGNAL rx_byte_reg, rx_byte_reg2 : STD_LOGIC_VECTOR(7 DOWNTO 0);
     SIGNAL rx_word : STD_LOGIC_VECTOR(15 DOWNTO 0);
     SIGNAL byte_count : unsigned(1 DOWNTO 0);
-    SIGNAL rx_byte_count : unsigned(RAM_ADR_WIDTH - 1 DOWNTO 0);
+    SIGNAL rx_byte_count : unsigned(5 DOWNTO 0);
     SIGNAL enable_rx_byte_counter : STD_LOGIC;
     SIGNAL init_byte_counter : STD_LOGIC;
 
@@ -111,14 +101,7 @@ BEGIN
         dat_en => rx_data_valid);
 
     inst_uart_send : UART_fifoed_send
-    GENERIC MAP(
-        fifo_size => 4,
-        fifo_almost => 2,
-        drop_oldest_when_full => false,
-        asynch_fifo_full => true,
-        baudrate => 115200,
-        clock_frequency => 100000000)
-        
+    
     PORT MAP(
         clk_100MHz => clk,
         reset => rst,
@@ -155,10 +138,10 @@ BEGIN
                 IF (init_byte_counter = '1') THEN
                     rx_byte_count <= (OTHERS => '0');
                 ELSIF (enable_rx_byte_counter = '1') THEN
-                    IF (rx_byte_count = to_unsigned(RAM_SIZE - 1, RAM_ADR_WIDTH)) THEN
+                    IF (rx_byte_count = to_unsigned(64 - 1, 6)) THEN
                         rx_byte_count <= (OTHERS => '0');
                     ELSE
-                        rx_byte_count <= rx_byte_count + to_unsigned(1, RAM_ADR_WIDTH);
+                        rx_byte_count <= rx_byte_count + to_unsigned(1, 6);
                     END IF;
                 END IF;
             END IF;
@@ -226,7 +209,7 @@ BEGIN
                     future_state <= WAIT_RX_BYTE;
                 END IF;
             WHEN WRITE_RX_BYTE =>
-                IF (rx_byte_count = to_unsigned(RAM_SIZE - 1, RAM_ADR_WIDTH)) THEN
+                IF (rx_byte_count = to_unsigned(64 - 1, 6)) THEN
                     future_state <= WAIT_SCAN_MEM;
                 ELSE
                     future_state <= INCR_RX_BYTE_COUNTER;
@@ -250,7 +233,7 @@ BEGIN
             WHEN READ_TX_BYTE =>
                 future_state <= ENABLE_TX;
             WHEN ENABLE_TX =>
-                IF (rx_byte_count = to_unsigned(RAM_SIZE - 1, RAM_ADR_WIDTH)) THEN
+                IF (rx_byte_count = to_unsigned(64 - 1, 6)) THEN
                     future_state <= OVER;
                 ELSE
                     future_state <= INCR_TX_BYTE_COUNTER;

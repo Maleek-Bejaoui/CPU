@@ -15,7 +15,7 @@
 -- Revision:
 -- Revision 0.01 - File Created
 -- Additional Comments:
--- 
+--   (RAM_ADR_WIDTH : INTEGER := 6);
 ----------------------------------------------------------------------------------
 
 
@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 ENTITY Control_Unit IS
-    GENERIC (RAM_ADR_WIDTH : INTEGER := 6);
+   
         PORT (
             clk         : IN STD_LOGIC;
             ce          : IN STD_LOGIC;
@@ -32,7 +32,7 @@ ENTITY Control_Unit IS
             carry       : IN STD_LOGIC;
             boot        : IN STD_LOGIC;
             data_in     : IN STD_LOGIC_VECTOR (15 DOWNTO 0);
-            adr         : OUT STD_LOGIC_VECTOR (RAM_ADR_WIDTH - 1 DOWNTO 0);
+            adr         : OUT STD_LOGIC_VECTOR (6 - 1 DOWNTO 0);
             clear_carry : OUT STD_LOGIC;
             enable_mem  : OUT STD_LOGIC;
             load_R1     : OUT STD_LOGIC;
