@@ -67,7 +67,7 @@ module tt_um_top #(
         .ce(ena),
         .rst(~rst_n),
         .load_R1(load_R1),
-        .load_accu(s_load_accu),
+        .load_ACCU(s_load_accu),
         .load_carry(load_carry),
         .init_carry(clear_carry),
         .sel_UAL(sel_UAL_UT),
