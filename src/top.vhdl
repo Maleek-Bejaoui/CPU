@@ -53,7 +53,7 @@ COMPONENT boot_loader IS
             clear_carry : OUT STD_LOGIC;
             enable_mem : OUT STD_LOGIC;
             load_R1 : OUT STD_LOGIC;
-             : OUT STD_LOGIC;
+            load_accu : OUT STD_LOGIC;
             load_carry : OUT STD_LOGIC;
             sel_UAL : OUT std_logic_vector(2 downto 0);
             w_mem : OUT STD_LOGIC);
@@ -66,7 +66,7 @@ COMPONENT boot_loader IS
             ce : IN STD_LOGIC;
             rst : IN STD_LOGIC;
             load_R1 : IN STD_LOGIC;
-             : IN STD_LOGIC;
+            load_accu : IN STD_LOGIC;
             load_carry : IN STD_LOGIC;
             init_carry : IN STD_LOGIC;
             sel_UAL : IN STD_LOGIC_vector(2 downto 0);
