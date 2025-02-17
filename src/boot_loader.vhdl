@@ -93,6 +93,9 @@ ARCHITECTURE Behavioral OF boot_loader IS
     SIGNAL init_tx_cycle_count, tx_cycle_count_over : STD_LOGIC;
     SIGNAL tx_data_valid_dly : STD_LOGIC;
     SIGNAL tx_word_valid : STD_LOGIC;
+    SIGNAL uart_send_fifo_empty : STD_LOGIC;
+    SIGNAL uart_send_fifo_afull : STD_LOGIC;
+    SIGNAL uart_send_fifo_full : STD_LOGIC;
 
 BEGIN
 
@@ -107,8 +110,7 @@ BEGIN
         dat => rx_byte,
         dat_en => rx_data_valid);
 
-        
-  inst_uart_send : UART_fifoed_send
+    inst_uart_send : UART_fifoed_send
     GENERIC MAP(
         fifo_size => 4,
         fifo_almost => 2,
@@ -116,20 +118,20 @@ BEGIN
         asynch_fifo_full => true,
         baudrate => 115200,
         clock_frequency => 100000000)
+        
     PORT MAP(
         clk_100MHz => clk,
         reset => rst,
         dat_en => tx_word_valid,
         dat => tx_byte,
-        TX => tx ,
-         fifo_empty => OPEN,
-         fifo_afull => OPEN,
-         fifo_full => OPEN
-);
-
+        TX => tx,
+        fifo_empty => uart_send_fifo_empty,
+        fifo_afull => uart_send_fifo_afull,
+        fifo_full => uart_send_fifo_full);
     ---------------------
     -- rx_byte_register
     ---------------------
+    
 
     b2w : byte_2_word
     PORT MAP(
