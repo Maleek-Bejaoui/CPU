@@ -67,7 +67,7 @@ module tt_um_top #(
         .ce(ena),
         .rst(~rst_n),
         .load_R1(load_R1),
-        .load_ACCU(s_load_accu),
+        .load_ACCU(s_load_accu),  
         .load_carry(load_carry),
         .init_carry(clear_carry),
         .sel_UAL(sel_UAL_UT),
@@ -75,6 +75,7 @@ module tt_um_top #(
         .carry(carry)
     );
 
+    /* verilator lint_off PINCONNECTEMPTY */
     boot_loader #(.RAM_ADR_WIDTH(RAM_ADR_WIDTH), .RAM_SIZE(RAM_SIZE)) BL (
         .rst(~rst_n),
         .clk(clk),
@@ -87,8 +88,12 @@ module tt_um_top #(
         .ram_rw(boot_ram_rw),
         .ram_enable(boot_ram_enable),
         .ram_adr(boot_ram_adr),
-        .ram_in(boot_ram_in)
+        .ram_in(boot_ram_in),
+        .fifo_empty(), 
+        .fifo_afull(),
+        .fifo_full()
     );
+    /* verilator lint_on PINCONNECTEMPTY */
 
     assign sig_rw = (boot) ? boot_ram_rw : w_mem;
     assign sig_ram_enable = (boot) ? boot_ram_enable : enable_mem;
