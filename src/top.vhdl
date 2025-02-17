@@ -53,7 +53,7 @@ COMPONENT boot_loader IS
             clear_carry : OUT STD_LOGIC;
             enable_mem : OUT STD_LOGIC;
             load_R1 : OUT STD_LOGIC;
-            load_accu : OUT STD_LOGIC;
+             : OUT STD_LOGIC;
             load_carry : OUT STD_LOGIC;
             sel_UAL : OUT std_logic_vector(2 downto 0);
             w_mem : OUT STD_LOGIC);
@@ -66,7 +66,7 @@ COMPONENT boot_loader IS
             ce : IN STD_LOGIC;
             rst : IN STD_LOGIC;
             load_R1 : IN STD_LOGIC;
-            load_accu : IN STD_LOGIC;
+             : IN STD_LOGIC;
             load_carry : IN STD_LOGIC;
             init_carry : IN STD_LOGIC;
             sel_UAL : IN STD_LOGIC_vector(2 downto 0);
@@ -95,7 +95,7 @@ COMPONENT boot_loader IS
     SIGNAL clear_carry : STD_LOGIC;
     SIGNAL enable_mem : STD_LOGIC;
     SIGNAL load_R1 : STD_LOGIC;
-    SIGNAL load_accu : STD_LOGIC;
+    SIGNAL s_load_accu : STD_LOGIC;
     SIGNAL load_carry : STD_LOGIC;
     SIGNAL sel_UAL_UT : STD_LOGIC_vector(2 downto 0);
     SIGNAL sel_UAL_UC : STD_LOGIC_vector(2 downto 0);
@@ -137,7 +137,7 @@ UC : Control_unit
         clear_carry => clear_carry,
         enable_mem => enable_mem,
         load_R1 => load_R1,
-        load_accu => load_accu,
+        load_accu => s_load_accu,
         load_carry => load_carry,
         sel_UAL => sel_UAL_UC,
         w_mem => w_mem);
@@ -150,7 +150,7 @@ UC : Control_unit
         ce => ena,
         rst => not(rst_n),
         load_R1 => load_R1,
-        load_accu => load_accu,
+        load_accu => s_load_accu,
         load_carry => load_carry,
         init_carry => clear_carry,
         sel_UAL => sel_UAL_UT,
