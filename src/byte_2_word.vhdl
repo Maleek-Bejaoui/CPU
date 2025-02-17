@@ -35,7 +35,7 @@ ENTITY byte_2_word IS
         clk : IN STD_LOGIC;
         ce : IN STD_LOGIC;
         byte_dv : IN STD_LOGIC;
-        byte : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
+        byteee : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
         word_dv : OUT STD_LOGIC;
         word : OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
 END byte_2_word;
@@ -55,7 +55,7 @@ BEGIN
         ELSIF (rising_edge(clk)) THEN
             IF (ce = '1') THEN
                 IF (byte_dv = '1') THEN
-                    byte_reg <= byte;
+                    byte_reg <= byteee;
                     byte_reg2 <= byte_reg;
                 END IF;
             END IF;
