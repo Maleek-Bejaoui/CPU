@@ -122,9 +122,9 @@ BEGIN
         dat_en => tx_word_valid,
         dat => tx_byte,
         TX => tx ,
-         fifo_empty => '0',
-         fifo_afull => '0',
-         fifo_full => '0'
+         fifo_empty => OPEN,
+         fifo_afull => OPEN,
+         fifo_full => OPEN
 );
 
     ---------------------
