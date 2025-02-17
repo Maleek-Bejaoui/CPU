@@ -26,8 +26,8 @@ entity Accu_register is
             ce          : in STD_LOGIC;
             rst         : in STD_LOGIC;
             load_ACCU   : in STD_LOGIC;
-            DATA_IN     : in STD_LOGIC_VECTOR (15 downto 0);
-            DATA_OUT    : out STD_LOGIC_VECTOR (15 downto 0));
+            data_in     : in STD_LOGIC_VECTOR (15 downto 0);
+            data_out    : out STD_LOGIC_VECTOR (15 downto 0));
 end Accu_register;
 
 architecture Behavioral of Accu_register is
@@ -37,11 +37,11 @@ begin
     process(rst, clk)
         begin
         if(rst = '1') then
-            DATA_OUT <= (others => '0');
+            data_out <= (others => '0');
         elsif(rising_edge(clk)) then
             if(ce = '1') then
                 if (load_ACCU = '1') then 
-                    DATA_OUT <= DATA_IN;
+                    data_out <= data_in;
                 end if;
             end if;
         end if;

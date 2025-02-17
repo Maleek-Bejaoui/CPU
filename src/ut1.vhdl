@@ -31,7 +31,7 @@ component UAL is
            sel_UAL : in std_logic_vector(2 downto 0);
            DATA_R1      : in STD_LOGIC_VECTOR (15 downto 0);
            DATA_ACCU    : in STD_LOGIC_VECTOR (15 downto 0);
-           DATA_OUT     : out STD_LOGIC_VECTOR (15 downto 0);
+           data_out     : out STD_LOGIC_VECTOR (15 downto 0);
            carry        : out STD_LOGIC);
 end component UAL;
 
@@ -40,8 +40,8 @@ component Accu_register is
             ce          : in STD_LOGIC;
             rst         : in STD_LOGIC;
             load_ACCU   : in STD_LOGIC;
-            DATA_IN     : in STD_LOGIC_VECTOR (15 downto 0);
-            DATA_OUT    : out STD_LOGIC_VECTOR (15 downto 0));
+            data_in     : in STD_LOGIC_VECTOR (15 downto 0);
+            data_out    : out STD_LOGIC_VECTOR (15 downto 0));
 end component Accu_register;
 
 component Carry_register is
@@ -70,7 +70,7 @@ begin
                DATA_R1  => R1_out,
                ce => ce,
                DATA_ACCU => ACCU_out,
-               DATA_OUT => UAL_OUT,
+               data_out => UAL_OUT,
                carry => carry_in);
     uut1 : Carry_register Port map( clk => clk,
                rst=> rst,
@@ -85,8 +85,8 @@ begin
                 ce  => ce,
                 rst => rst,
                 load_ACCU=> load_ACCU,
-                DATA_IN => UAL_OUT,
-                DATA_OUT => ACCU_out);
+                data_in => UAL_OUT,
+                data_out => ACCU_out);
                 
    process(ACCU_out)
    begin

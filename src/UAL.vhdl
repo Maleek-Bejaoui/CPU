@@ -24,11 +24,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity UAL is
-    Port (  CE  : in STD_LOGIC;
+    Port (  ce  : in STD_LOGIC;
            sel_UAL: in std_logic_vector(2 downto 0);
            DATA_R1      : in STD_LOGIC_VECTOR (15 downto 0);
            DATA_ACCU    : in STD_LOGIC_VECTOR (15 downto 0);
-           DATA_OUT     : out STD_LOGIC_VECTOR (15 downto 0);
+           data_out     : out STD_LOGIC_VECTOR (15 downto 0);
            carry        : out STD_LOGIC);
 end UAL;
 
@@ -46,9 +46,9 @@ begin
     process(DATA_R1, DATA_ACCU, sel_UAL, s_out)
     begin
         if (sel_UAL="000") then
-            DATA_OUT <= DATA_R1 NOR DATA_ACCU;
+            data_out <= DATA_R1 NOR DATA_ACCU;
         else
-            DATA_OUT <= std_logic_vector(s_out(15 downto 0));
+            data_out <= std_logic_vector(s_out(15 downto 0));
         end if;                
     end process;                
 
