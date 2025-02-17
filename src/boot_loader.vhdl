@@ -124,7 +124,7 @@ BEGIN
         TX => tx ,
          fifo_empty => '0',
          fifo_afull => '0',
-         fifo_full => '0');
+         fifo_full => '0'
 );
 
     ---------------------
