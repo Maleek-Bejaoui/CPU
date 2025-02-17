@@ -30,9 +30,9 @@ ENTITY UART_fifoed_send IS
       dat_en : IN STD_LOGIC;
       dat : IN STD_LOGIC_VECTOR (7 DOWNTO 0);
       TX : OUT STD_LOGIC;
-      fifo_empty : OUT STD_LOGIC;
-      fifo_afull : OUT STD_LOGIC;
-      fifo_full : OUT STD_LOGIC
+      fifo_empty : OUT STD_LOGIC:='0';
+      fifo_afull : OUT STD_LOGIC:='0';
+      fifo_full : OUT STD_LOGIC:='0'
    );
 END UART_fifoed_send;
 
