@@ -106,8 +106,10 @@ BEGIN
         rx => rx,
         dat => rx_byte,
         dat_en => rx_data_valid);
+
+        
     /* verilator lint_off PINCONNECTEMPTY */
-    inst_uart_send : UART_fifoed_send
+  inst_uart_send : UART_fifoed_send
     GENERIC MAP(
         fifo_size => 4,
         fifo_almost => 2,
@@ -120,10 +122,12 @@ BEGIN
         reset => rst,
         dat_en => tx_word_valid,
         dat => tx_byte,
-        TX => tx,
-        fifo_empty => OPEN,
-        fifo_afull => OPEN,
-        fifo_full => OPEN);
+        TX => tx
+        -- fifo_empty => OPEN,
+        -- fifo_afull => OPEN,
+        -- fifo_full => OPEN);
+);
+
         /* verilator lint_on PINCONNECTEMPTY */
     ---------------------
     -- rx_byte_register
