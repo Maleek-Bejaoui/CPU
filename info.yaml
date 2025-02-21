@@ -29,7 +29,7 @@ project:
     - "UAL.vhdl"
     - "UART_fifoed_send_V1.vhdl"
     - "UC.vhdl"
-    - "boot_loader.vhdl"
+    - "boot_loader.v"
     - "byte_2_word.vhdl"
     - "fsm.vhdl"
     - "ram.vhdl"
