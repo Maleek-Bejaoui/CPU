@@ -63,15 +63,15 @@ UART_recv uart_recv_inst (
 // Instantiating byte to word converter
 byte_2_word b2w_inst (
     .rst(rst), .clk(clk), .ce(ce),
-    .byte_dv(rx_data_valid), .byte(rx_byte),
+    .byte_dv(rx_data_valid), .byteee(rx_byte),
     .word_dv(rx_word_valid), .word(ram_in)
 );
 
-// Instantiating word to byte converter
+// Instantiating word to byteee converter
 word_2_byte w2b_inst (
     .rst(rst), .clk(clk), .ce(ce),
     .word_dv(tx_data_valid), .word(ram_out),
-    .byte_dv(tx_word_valid), .byte(tx_byte)
+    .byte_dv(tx_word_valid), .byteee(tx_byte)
 );
 
 // Instantiating UART transmitter
