@@ -75,10 +75,7 @@ word_2_byte w2b_inst (
 );
 
 // Instantiating UART transmitter
-UART_fifoed_send #(
-    .fifo_size(4), .fifo_almost(2), .drop_oldest_when_full(0),
-    .asynch_fifo_full(1), .baudrate(115200), .clock_frequency(100000000)
-) uart_send_inst (
+UART_fifoed_send uart_send_inst (
     .clk_100MHz(clk), .reset(rst),
     .dat_en(tx_word_valid), .dat(tx_byte),
     .TX(tx)
