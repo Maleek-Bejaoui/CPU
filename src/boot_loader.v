@@ -53,7 +53,7 @@ parameter [3:0]
 reg [3:0] current_state, future_state;
 
 
-
+/* verilator lint_off PINMISSING */
 
 // Instantiating UART receiver
 UART_recv uart_recv_inst (
