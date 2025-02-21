@@ -89,10 +89,8 @@ module tt_um_top (
         .ram_rw(boot_ram_rw),
         .ram_enable(boot_ram_enable),
         .ram_adr(boot_ram_adr),
-        .ram_in(boot_ram_in),
-        .fifo_empty(0), 
-        .fifo_afull(),
-        .fifo_full()
+        .ram_in(boot_ram_in)
+       
     );
     /* verilator lint_on PINCONNECTEMPTY */
 
