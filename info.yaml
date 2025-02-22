@@ -21,21 +21,25 @@ project:
   #          the shuttle and VHDL support may be dropped for future shuttles if we see low usage.
   source_files:
     - "top.v"
-    - "Accu_register.vhdl"
-    - "Carry_register.vhdl"
-    - "Ins_register.vhdl"
-    - "Prog_counter.vhdl"
-    - "R1_register.vhdl"
-    - "UAL.vhdl"
-    - "UART_fifoed_send_V1.vhdl"
+    
     - "UC.vhdl"
-    - "boot_loader.v"
-    - "byte_2_word.vhdl"
-    - "fsm.vhdl"
-    - "ram.vhdl"
-    - "uart_recv.vhdl"
+      - "Prog_counter.vhdl"
+      - "Ins_register.vhdl"
+      - "fsm.vhdl"
+    
     - "ut1.vhdl"
-    - "word_2_byte.vhdl"
+      - "R1_register.vhdl"
+      - "UAL.vhdl"
+      - "Carry_register.vhdl"
+      - "Accu_register.vhdl"
+
+    - "boot_loader.v"
+      - "uart_recv.vhdl"
+      - "byte_2_word.vhdl"
+      - "word_2_byte.vhdl"
+      - "UART_fifoed_send_V1.vhdl"
+
+    - "ram.vhdl"
     
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
