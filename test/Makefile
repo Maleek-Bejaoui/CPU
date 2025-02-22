@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= vhdl
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = generated/top.vhdl
+PROJECT_SOURCES = generated/top.v
 
 ifneq ($(GATES),yes)
 
