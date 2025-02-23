@@ -20,27 +20,23 @@ project:
   # WARNING: VHDL support in Tiny Tapeout is experimental. The template may get changes during
   #          the shuttle and VHDL support may be dropped for future shuttles if we see low usage.
   source_files:
-    - "top.v"
-    
-    - "UC.vhdl"
-      - "Prog_counter.vhdl"
-      - "Ins_register.vhdl"
-      - "fsm.vhdl"
-    
-    - "ut1.vhdl"
-      - "R1_register.vhdl"
-      - "UAL.vhdl"
-      - "Carry_register.vhdl"
-      - "Accu_register.vhdl"
+  - "top.v"
+  - "UC.vhdl"
+  - "Prog_counter.vhdl"
+  - "Ins_register.vhdl"
+  - "fsm.vhdl"
+  - "ut1.vhdl"
+  - "R1_register.vhdl"
+  - "UAL.vhdl"
+  - "Carry_register.vhdl"
+  - "Accu_register.vhdl"
+  - "boot_loader.v"
+  - "uart_recv.vhdl"
+  - "byte_2_word.vhdl"
+  - "word_2_byte.vhdl"
+  - "UART_fifoed_send_V1.vhdl"
+  - "ram.vhdl"
 
-    - "boot_loader.v"
-      - "uart_recv.vhdl"
-      - "byte_2_word.vhdl"
-      - "word_2_byte.vhdl"
-      - "UART_fifoed_send_V1.vhdl"
-
-    - "ram.vhdl"
-    
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
